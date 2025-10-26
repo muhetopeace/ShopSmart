@@ -1,0 +1,12 @@
+/* Custom styles if needed, though Tailwind handles most styling */
+body {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+footer {
+    margin-top: auto;
+}
+header {
+background-color: rgb(51, 184, 37);
+}
