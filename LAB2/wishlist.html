@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ShopSmart - Wishlist</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#4F46E5',
+                        secondary: '#10B981',
+                    }
+                }
+            }
+        }
+    </script>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body class="bg-gray-100 font-sans">
+    <!-- Navbar -->
+    <nav class="bg-pink-400 shadow-md fixed w-full top-0 z-10">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16">
+                <div class="flex items-center">
+                    <a href="index.html" class="text-2xl font-bold text-primary">ShopSmart</a>
+                </div>
+                <div class="flex items-center space-x-4">
+                    <a href="index.html" class="text-gray-700 hover:text-primary">Home</a>
+                    <a href="wishlist.html" class="text-gray-700 hover:text-primary relative">
+                        Wishlist
+                        <span id="wishlistCounter" class="absolute -top-2 -right-4 bg-secondary text-white text-xs rounded-full px-2 py-1"></span>
+                    </a>
+                    <a href="about.html" class="text-gray-700 hover:text-primary">About</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Wishlist Section -->
+    <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 mt-16">
+        <div class="flex justify-between items-center mb-8">
+            <h1 class="text-3xl font-bold">Your Wishlist</h1>
+            <button id="clearWishlist" class="bg-gray-500 text-white px-4 py-2 rounded-md hover:bg-red-500 transition-colors">Clear All</button>
+        </div>
+        <div id="wishlistGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6"></div>
+        <div id="emptyWishlist" class="text-center hidden">
+            <p class="text-xl text-gray-600">Your wishlist is empty</p>
+        </div>
+    </section>
+
+     <!-- Footer -->
+    <footer class="bg-pink-400 shadow-md py-4">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <p>&copy; 2025 ShopSmart. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script type="module" src="wishlist.js"></script>
+    <script type="module">
+        import { getWishlist, removeFromWishlist, displayWishlist, clearWishlist } from './wishlist.js';
+
+        const wishlistGrid = document.getElementById('wishlistGrid');
+        const emptyWishlist = document.getElementById('emptyWishlist');
+        const clearWishlistButton = document.getElementById('clearWishlist');
+        const wishlistCounter = document.getElementById('wishlistCounter');
+
+        function renderWishlist() {
+            const wishlist = getWishlist();
+            displayWishlist(wishlist, wishlistGrid, emptyWishlist);
+            wishlistCounter.textContent = wishlist.length || '';
+            wishlistCounter.classList.toggle('hidden', wishlist.length === 0);
+        }
+
+        wishlistGrid.addEventListener('click', (e) => {
+            if (e.target.tagName === 'BUTTON' && e.target.dataset.id) {
+                removeFromWishlist(e.target.dataset.id);
+                renderWishlist();
+            }
+        });
+
+        clearWishlistButton.addEventListener('click', () => {
+            clearWishlist();
+            renderWishlist();
+        });
+
+        renderWishlist();
+    </script>
+</body>
+</html>

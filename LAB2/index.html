@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ShopSmart - Home</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#4F46E5',
+                        secondary: '#10B981',
+                    }
+                }
+            }
+        }
+    </script>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body class="bg-gray-100 font-sans">
+    <!-- Navbar -->
+    <nav class="bg-pink-400 shadow-md fixed w-full top-0 z-10">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16">
+                <div class="flex items-center">
+                    <a href="index.html" class="text-2xl font-bold text-primary">ShopSmart</a>
+                </div>
+                <div class="flex items-center space-x-4">
+                    <a href="index.html" class="text-gray-700 hover:text-primary">Home</a>
+                    <a href="wishlist.html" class="text-gray-700 hover:text-primary relative">
+                        Wishlist
+                        <span id="wishlistCounter" class="absolute -top-2 -right-4 bg-secondary text-white text-xs rounded-full px-2 py-1"></span>
+                    </a>
+                    <a href="about.html" class="text-gray-700 hover:text-primary">About</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <header class=" text-white text-center py-20 mt-16">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <h1 class="text-3xl sm:text-4xl font-bold mb-4">Discover Amazing Products</h1>
+            <p class="text-lg sm:text-xl">Browse our curated collection</p>
+        </div>
+    </header>
+
+    <!-- Product Grid -->
+    <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        <div id="productGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6"></div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-pink-400 shadow-md py-4">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <p>&copy; 2025 ShopSmart. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script type="module" src="wishlist.js"></script>
+    <script type="module">
+        import { addToWishlist, isInWishlist, getWishlist } from './wishlist.js';
+
+        const productGrid = document.getElementById('productGrid');
+        const wishlistCounter = document.getElementById('wishlistCounter');
+        const sampleProducts = [
+            { id: 1, title: "Men's Cotton Jacket", price: 29.99, image: "https://fakestoreapi.com/img/71li-ujtlUL._AC_UX679_.jpg" },
+            { id: 2, title: "Mens Casual Slim Fit", price: 39.99, image: "https://fakestoreapi.com/img/71YXzeOuslL._AC_UY879_.jpg" },
+            { id: 3, title: "Women's Naga Gold & Silver Bracelet", price: 49.99, image: "https://fakestoreapi.com/img/71pWzhdJNwL._AC_UL640_QL65_ML3_.jpg" },
+            { id: 4, title: "Solid Gold Petite Micropave", price: 59.99, image: "https://fakestoreapi.com/img/61sbMiUnoGL._AC_UL640_QL65_ML3_.jpg" }
+        ];
+
+        function updateWishlistCounter() {
+            const wishlist = getWishlist();
+            wishlistCounter.textContent = wishlist.length || '';
+            wishlistCounter.classList.toggle('hidden', wishlist.length === 0);
+        }
+
+        function displayProducts() {
+            productGrid.innerHTML = '';
+            sampleProducts.forEach(product => {
+                const card = document.createElement('div');
+                card.className = 'bg-white rounded-lg shadow-md overflow-hidden transform hover:scale-105 transition-transform duration-200 relative';
+                card.innerHTML = `
+                    <img src="${product.image}" alt="${product.title}" class="w-full h-48 object-contain p-4 bg-gray-50" onerror="this.src='https://via.placeholder.com/150';">
+                    <div class="p-4">
+                        <h3 class="text-lg font-semibold mb-2 truncate">${product.title}</h3>
+                        <p class="text-gray-600 mb-2">$${product.price.toFixed(2)}</p>
+                        <button class="w-full bg-secondary text-white py-2 rounded-md hover:bg-green-700 transition-colors" data-id="${product.id}">
+                            ${isInWishlist(product.id) ? 'Remove from Wishlist' : 'Add to Wishlist'}
+                        </button>
+                    </div>
+                    ${isInWishlist(product.id) ? '<span class="absolute top-2 right-2 bg-secondary text-white text-xs rounded-full px-2 py-1">Wishlisted</span>' : ''}
+                `;
+                const button = card.querySelector('button');
+                button.addEventListener('click', () => {
+                    addToWishlist(product);
+                    displayProducts(); // Refresh to update badge
+                    updateWishlistCounter();
+                });
+                productGrid.appendChild(card);
+            });
+        }
+
+        displayProducts();
+        updateWishlistCounter();
+    </script>
+</body>
+</html>
