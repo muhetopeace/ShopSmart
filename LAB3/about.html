@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ShopSmart - About</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#4F46E5',
+                        secondary: '#10B981',
+                    }
+                }
+            }
+        }
+    </script>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body class="bg-gray-300 font-sans">
+    <!-- Navbar -->
+    <nav class="bg-pink-400 shadow-md fixed w-full top-0 z-10">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16">
+                <div class="flex items-center">
+                    <a href="index.html" class="text-2xl font-bold text-primary">ShopSmart</a>
+                </div>
+                <div class="flex items-center space-x-4">
+                    <a href="index.html" class="text-gray-700 hover:text-primary">Home</a>
+                    <a href="wishlist.html" class="text-gray-700 hover:text-primary relative">
+                        Wishlist
+                        <span id="wishlistCounter" class="absolute -top-2 -right-4 bg-secondary text-white text-xs rounded-full px-2 py-1"></span>
+                    </a>
+                    <a href="about.html" class="text-gray-700 hover:text-primary">About</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- About Section -->
+    <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 mt-16">
+        <h1 class="text-3xl sm:text-4xl font-bold text-primary mb-8 text-center">About ShopSmart</h1>
+        
+        <!-- Banner Image -->
+        <div class="mb-8 bg-gray-100">
+            <img src="https://images.unsplash.com/photo-1556740714-7c4b6e7e7d7e" alt="Shopping Banner" class="w-full h-64 object-cover rounded-lg shadow-md">
+        </div>
+
+        <!-- App Description -->
+        <div class="bg-gray-100 p-6 rounded-lg shadow-md mb-8">
+            <h2 class="text-2xl font-semibold mb-4">Our Purpose</h2>
+            <p class="text-lg text-gray-700 mb-4">ShopSmart is your ultimate product discovery and wishlist app, designed to make online shopping effortless and enjoyable. Browse a curated selection of products, save your favorites to a personalized wishlist, and revisit them anytime. Our app is built with simplicity and user experience in mind, ensuring you find what you love quickly and easily.</p>
+        </div>
+
+        <!-- Features -->
+        <div class="bg-gray-100 p-6 rounded-lg shadow-md mb-8">
+            <h2 class="text-2xl font-semibold mb-4">Features</h2>
+            <ul class="list-disc list-inside text-lg text-gray-700 space-y-2">
+                <li><span class="font-semibold">Responsive Design:</span> Seamlessly adapts to mobile, tablet, and desktop devices for shopping on the go.</li>
+                <li><span class="font-semibold">Wishlist Management:</span> Add or remove products with a single click, with your selections saved across sessions.</li>
+                <li><span class="font-semibold">Curated Products:</span> Explore a handpicked collection of high-quality items tailored to your interests.</li>
+            </ul>
+        </div>
+
+        <!-- Mission Statement -->
+        <div class="bg-gray-100 p-6 rounded-lg shadow-md">
+            <h2 class="text-2xl font-semibold mb-4">Our Mission</h2>
+            <p class="text-lg text-gray-700">At ShopSmart, we aim to empower shoppers by providing a clean, intuitive platform to discover and organize products they love. Our mission is to simplify the shopping experience, making it accessible and delightful for everyone, everywhere.</p>
+        </div>
+    </section>
+
+    <footer class="bg-pink-400 text-white shadow-md py-4 fixed bottom-0 w-full">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+    <p>&copy; 2025 ShopSmart. All rights reserved.</p>
+  </div>
+</footer>
+
+    <script type="module" src="wishlist.js"></script>
+    <script type="module">
+        import { getWishlist } from './wishlist.js';
+
+        const wishlistCounter = document.getElementById('wishlistCounter');
+        function updateWishlistCounter() {
+            const wishlist = getWishlist();
+            wishlistCounter.textContent = wishlist.length || '';
+            wishlistCounter.classList.toggle('hidden', wishlist.length === 0);
+        }
+        updateWishlistCounter();
+    </script>
+</body>
+</html>

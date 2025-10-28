@@ -1,0 +1,22 @@
+body {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+footer {
+    margin-top: auto;
+}
+header {
+background-color: rgb(143, 126, 142);
+}
+#wishlistCounter {
+    transition: all 0.3s ease;
+}
+
+.product-card {
+    transition: transform 0.2s ease;
+}
+
+.product-card:hover {
+    transform: scale(1.05);
+}
