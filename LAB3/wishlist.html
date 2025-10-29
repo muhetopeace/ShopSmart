@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>ShopSmart - Wishlist</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <script>
@@ -10,27 +10,27 @@
       theme: {
         extend: {
           colors: {
-            primary: '#4F46E5',
-            secondary: '#10B981',
-          }
-        }
-      }
-    }
+            primary: '#6366F1',
+            secondary: '#14B8A6',
+            accent: '#F59E0B',
+          },
+        },
+      },
+    };
   </script>
-  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="styles.css" />
 </head>
-<body class="bg-gray-100 font-sans">
+
+<body class="bg-gradient-to-b from-gray-100 via-white to-gray-200 font-sans text-gray-800">
   <!-- Navbar -->
-  <nav class="bg-pink-400 shadow-md fixed w-full top-0 z-10">
+  <nav class="bg-gradient-to-r from-primary to-secondary shadow-lg fixed w-full top-0 z-10 text-white">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="flex justify-between h-16">
-        <div class="flex items-center">
-          <a href="index.html" class="text-2xl font-bold text-primary">ShopSmart</a>
-        </div>
-        <div class="flex items-center space-x-4">
-          <a href="index.html" class="text-gray-700 hover:text-primary">Home</a>
-          <a href="wishlist.html" class="text-gray-700 hover:text-primary">Wishlist</a>
-          <a href="about.html" class="text-gray-700 hover:text-primary">About</a>
+      <div class="flex justify-between h-16 items-center">
+        <a href="index.html" class="text-2xl font-bold">ShopSmart</a>
+        <div class="flex space-x-6">
+          <a href="index.html" class="hover:text-accent">Home</a>
+          <a href="wishlist.html" class="hover:text-accent">Wishlist</a>
+          <a href="about.html" class="hover:text-accent">About</a>
         </div>
       </div>
     </div>
@@ -39,8 +39,7 @@
   <!-- Wishlist Section -->
   <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 mt-16">
     <div class="flex justify-between items-center mb-8">
-      <h1 class="text-3xl font-bold">Your Wishlist</h1>
-      <!--  Clear All Button -->
+      <h1 class="text-3xl font-bold text-primary">Your Wishlist</h1>
       <button id="clearAllBtn" class="bg-red-500 text-white px-4 py-2 rounded-md hover:bg-red-600 transition">
         Clear All
       </button>
@@ -49,64 +48,74 @@
     <div id="wishlistGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6"></div>
     <div id="emptyWishlist" class="text-center hidden">
       <p class="text-xl text-gray-600">Your wishlist is empty</p>
+      <a href="index.html" class="inline-block mt-4 bg-secondary text-white px-6 py-2 rounded-md hover:bg-green-700 transition">Start Shopping</a>
     </div>
   </section>
+<!-- Font Awesome for icons -->
+<link
+  rel="stylesheet"
+  href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+/>
 
-  <footer class="bg-pink-400 text-white shadow-md py-4 fixed bottom-0 w-full">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-      <p>&copy; 2025 ShopSmart. All rights reserved.</p>
-    </div>
-  </footer>
+<!-- Footer -->
+<footer class="bg-gradient-to-r from-primary to-secondary text-white py-4 w-full fixed bottom-0 left-0">
+  <div class="flex justify-center space-x-6">
+    <a
+      href="https://instagram.com/__pe.ace02"
+      target="_blank"
+      class="hover:text-pink-400 transition"
+    >
+      <i class="fab fa-instagram text-2xl"></i>
+    </a>
 
-  <!--  Toast Notification -->
-  <div id="toast" class="fixed bottom-20 right-5 bg-green-500 text-white px-6 py-3 rounded-lg shadow-lg hidden transition-opacity duration-500">
-    Wishlist cleared successfully ✅
+    <a
+      href="https://github.com/muhetopeace"
+      target="_blank"
+      class="hover:text-gray-400 transition"
+    >
+      <i class="fab fa-github text-2xl"></i>
+    </a>
   </div>
 
+  <p class="text-center text-sm mt-2">
+    © 2025 Muheto Peace. All rights reserved.
+  </p>
+</footer>
+
+
+  <!-- FontAwesome -->
+  <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+
+  <!-- Scripts -->
   <script type="module" src="wishlist.js"></script>
   <script type="module">
-    import { getWishlist, removeFromWishlist, displayWishlist, clearWishlist } from './wishlist.js';
+    import { getWishlist, removeFromWishlist, displayWishlist, clearWishlist } from "./wishlist.js";
 
-    const wishlistGrid = document.getElementById('wishlistGrid');
-    const emptyWishlist = document.getElementById('emptyWishlist');
-    const clearAllBtn = document.getElementById('clearAllBtn');
-    const toast = document.getElementById('toast');
+    const wishlistGrid = document.getElementById("wishlistGrid");
+    const emptyWishlist = document.getElementById("emptyWishlist");
+    const clearAllBtn = document.getElementById("clearAllBtn");
 
     function renderWishlist() {
       const wishlist = getWishlist();
       displayWishlist(wishlist, wishlistGrid, emptyWishlist);
     }
 
-    wishlistGrid.addEventListener('click', (e) => {
-      if (e.target.tagName === 'BUTTON' && e.target.dataset.id) {
+    wishlistGrid.addEventListener("click", (e) => {
+      if (e.target.tagName === "BUTTON" && e.target.dataset.id) {
         removeFromWishlist(e.target.dataset.id);
         renderWishlist();
       }
     });
 
-    //  Clear all wishlist + Toast message
-    clearAllBtn.addEventListener('click', () => {
-      if (confirm('Are you sure you want to clear your entire wishlist?')) {
+    clearAllBtn.addEventListener("click", () => {
+      if (confirm("Are you sure you want to clear your entire wishlist?")) {
         clearWishlist();
         renderWishlist();
-        showToast();
       }
     });
-
-    //  Toast function
-    function showToast() {
-      toast.classList.remove('hidden');
-      toast.classList.add('opacity-100');
-      setTimeout(() => {
-        toast.classList.add('opacity-0');
-      }, 2000); 
-      setTimeout(() => {
-        toast.classList.add('hidden');
-        toast.classList.remove('opacity-0');
-      }, 2500);
-    }
 
     renderWishlist();
   </script>
 </body>
 </html>
+

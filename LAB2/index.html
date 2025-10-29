@@ -10,8 +10,9 @@
             theme: {
                 extend: {
                     colors: {
-                        primary: '#4F46E5',
-                        secondary: '#10B981',
+                                    primary: '#6366F1',
+            secondary: '#14B8A6',
+            accent: '#F59E0B',
                     }
                 }
             }
@@ -21,7 +22,7 @@
 </head>
 <body class="bg-gray-100 font-sans">
     <!-- Navbar -->
-    <nav class="bg-pink-400 shadow-md fixed w-full top-0 z-10">
+    <nav class="bg-gradient-to-r from-primary to-secondary  shadow-md fixed w-full top-0 z-10">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex justify-between h-16">
                 <div class="flex items-center">
@@ -52,12 +53,39 @@
         <div id="productGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6"></div>
     </section>
 
-    <!-- Footer -->
-    <footer class="bg-pink-400 shadow-md py-4">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-            <p>&copy; 2025 ShopSmart. All rights reserved.</p>
-        </div>
-    </footer>
+
+<!-- Font Awesome for icons -->
+<link
+  rel="stylesheet"
+  href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+/>
+
+<!-- Footer -->
+<footer class="bg-gradient-to-r from-primary to-secondary text-white py-4 w-full fixed bottom-0 left-0">
+  <div class="flex justify-center space-x-6">
+    <a
+      href="https://instagram.com/__pe.ace02"
+      target="_blank"
+      class="hover:text-pink-400 transition"
+    >
+      <i class="fab fa-instagram text-2xl"></i>
+    </a>
+
+    <a
+      href="https://github.com/muhetopeace"
+      target="_blank"
+      class="hover:text-gray-400 transition"
+    >
+      <i class="fab fa-github text-2xl"></i>
+    </a>
+  </div>
+
+  <p class="text-center text-sm mt-2">
+    © 2025 Muheto Peace. All rights reserved.
+  </p>
+</footer>
+
+
 
     <script type="module" src="wishlist.js"></script>
     <script type="module">

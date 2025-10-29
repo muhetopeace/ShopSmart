@@ -43,11 +43,11 @@ export function displayWishlist(wishlist, gridElement, emptyElement) {
         const card = document.createElement('div');
         card.className = 'bg-white rounded-lg shadow-md overflow-hidden transform hover:scale-105 transition-transform duration-200';
         card.innerHTML = `
-            <img src="${product.image}" alt="${product.title}" class="w-full h-48 object-contain p-4 bg-gray-50" onerror="this.src='https://via.placeholder.com/150';">
+            <img src="${product.image}" alt="${product.title}" class="w-full h-48 object-contain p-4 bg-red-50" onerror="this.src='https://via.placeholder.com/150';">
             <div class="p-4">
                 <h3 class="text-lg font-semibold mb-2 truncate">${product.title}</h3>
                 <p class="text-gray-600 mb-2">$${product.price.toFixed(2)}</p>
-                <button class="w-full bg-gray-500 text-white py-2 rounded-md hover:bg-red-500 transition-colors" data-id="${product.id}">Remove</button>
+                <button class="w-full bg-red-500 text-white py-2 rounded-md hover:bg-gray-500 transition-colors" data-id="${product.id}">Remove</button>
             </div>
         `;
         gridElement.appendChild(card);
